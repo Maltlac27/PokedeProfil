@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+//App.js
+import Pokemons from './components/Pokemons';
+import Details from './components/Details';
+import React, { useState } from 'react';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-export default function App() {
+
+const Tab = createBottomTabNavigator();
+
+function CompteurTabScreen() {
+  const [count, setCount] = useState(0);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setCount((prevCount) => prevCount + 1);
+    }, [])
+  );
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Compteur count={count} />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Pokémons" component={Pokemons} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
