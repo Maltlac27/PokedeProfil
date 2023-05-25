@@ -1,11 +1,13 @@
 //Details.js
 import React, {useState, useEffect} from 'react';
 import {View, Text, Image, StyleSheet, ActivityIndicator} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Details = props => {
-  const [details, setDetails] = useState([]);
+ // const [details, setDetails] = useState([]);
 
-  useEffect(() => {
+ /* useEffect(() => {
     fetchPokemonDetails();
   }, []);
 
@@ -14,10 +16,17 @@ const Details = props => {
     fetch(`https://pokeapi.co/api/v2/pokemon/${state.params.pokemon}`)
       .then(res => res.json())
       .then(details => setDetails(details));
-  };
+  };*/
+  const  pokemonInfo  = props.navigation;
+  console.log(pokemonInfo)
+  return /*details.name ?*/ (
+    
+    <View>
 
-  return details.name ? (
-    <View style={{flex: 1, alignItems: 'center'}}>
+      
+      <Text>props.navigation</Text>
+    </View> 
+    /*<View style={{flex: 1, alignItems: 'center'}}>
       <Image
         style={styles.image}
         source={{
@@ -33,12 +42,12 @@ const Details = props => {
         Ability: {details.abilities[0].ability.name}
       </Text>
       <Text style={styles.text}>Type: {details.types[0].type.name}</Text>
-    </View>
-  ) : (
+    </View>*/
+  ) /*: (
     <View style={styles.indicator}>
       <ActivityIndicator size="large" color="#E63F34" />
     </View>
-  );
+  );*/
 };
 
 export default Details;

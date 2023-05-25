@@ -19,38 +19,30 @@ const Pokemons = props => {
   }, []);
 
   const fetchPokemons = () => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=50')
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=500')
       .then(response => response.json())
       .then(pokemons => setPokemons(pokemons.results));
   };
 
   return (
     <View>
-      <View style={styles.searchCont}>
-        <TextInput
-          style={styles.searchfeild}
-          placeholder="Search Pokemons"
-          onChangeText={value => setSearchfeild(value)}
-          value={searchfeild}
-        />
-      </View>
       <ScrollView>
         <View style={styles.container}>
           {pokemons
-            .filter(pokemon =>
-              pokemon.name.toLowerCase().includes(searchfeild.toLowerCase())
-            )
             .map((pokemon, index) => {
               return (
                 <TouchableOpacity
                   activeOpacity={0.5}
                   key={index}
                   style={styles.card}
+                  
                   onPress={() =>
                     props.navigation.navigate('Details', {
                       pokemon: pokemon.name,
                     })
+                    
                   }>
+
                   <Image
                     style={{width: 150, height: 150}}
                     source={{
@@ -69,6 +61,7 @@ const Pokemons = props => {
   );
 };
 
+
 export default Pokemons;
 
 const styles = StyleSheet.create({
@@ -77,7 +70,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    marginTop: 30,
   },
   card: {
     display: 'flex',
